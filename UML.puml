@@ -1,0 +1,132 @@
+@startuml
+class com.example.tetris.Tetris {
++ {static} int MOVE
++ {static} int SIZE
++ {static} int XMAX
++ {static} int YMAX
++ {static} int[][] MESH
+~ {static} Pane group
+- {static} Form object
+- {static} Scene scene
+- {static} int top
+- {static} boolean game
+- {static} Form nextObj
+- {static} int linesNumbers
++ {static} int score
++ {static} int highScore
+~ ShowNext shownext
++ {static} int countChange
+~ File file
+~ {static} Timeline timeline
+~ {static} Intro intro
+~ {static} File musicFile
+~ {static} Media musicMedia
+~ {static} MediaPlayer musicPlayer
+~ {static} Image icon
+~ {static} Image background_image
+~ {static} ImageView background
+~ {static} Color frameColor
+~ {static} Line line_right
+~ {static} Color lineColor
+~ {static} Rectangle frame
+~ Stage stage_settings
+~ Settings settingsPane
++ {static} void main(String[])
++ void start(Stage)
+- void moveOnKeyPress(Form)
+- void MoveTurn(Form)
+- void RemoveRows(Pane)
+- void MoveDown(Rectangle)
+- void MoveRight(Rectangle)
+- void MoveLeft(Rectangle)
+- void MoveUp(Rectangle)
+- void MoveDown(Form)
+- boolean moveA(Form)
+- boolean moveB(Form)
+- boolean moveC(Form)
+- boolean moveD(Form)
+- boolean canRotate(Rectangle,int,int)
+- void getHighScore()
+- void setHighScore()
+- void ChangeShape()
+}
+class com.example.tetris.Intro {
+~ double width
+~ double height
+~ StackPane stackPane
+~ File introFile
+~ Media introMedia
+~ MediaPlayer introPlayer
+~ MediaView introView
+~ LinearGradient introFrame
+~ Rectangle frame
++ <<Create>> Intro()
++ void stop()
++ void colorAnimation()
+}
+class com.example.tetris.UserControl {
+~ StackPane top
++ <<Create>> UserControl()
+}
+class com.example.tetris.Settings {
+~ {static} UserControl userControl
+~ StackPane pane
+~ Button continue_game
+~ ToggleButton Modes
+~ Button controls
+~ ToggleButton music
+~ VBox vBox
+~ Image background
+~ Image newImage
+~ Stage stage_userControl
+~ Scene scene_userControl
+~ {static} int stageClose
++ <<Create>> Settings()
++ void setPane()
++ void setButtonsStyle()
+}
+class com.example.tetris.ShowNext {
++ {static} GridPane gridpane
++ {static} int SIZE
+~ LinearGradient color
+~ Form form
+- String name
+~ Rectangle a
++ <<Create>> ShowNext(String)
++ void setName(String)
++ void MakeNextShape(String)
++ GridPane getGridPane()
++ void delNextShape()
+- void colorShape()
+}
+class com.example.tetris.Controller {
++ {static} int MOVE
++ {static} int SIZE
++ {static} int XMAX
++ {static} int[][] MESH
++ {static} void MoveRight(Form)
++ {static} void MoveLeft(Form)
++ {static} Form makeRect()
+}
+class com.example.tetris.Form {
+~ Rectangle a
+~ Rectangle b
+~ Rectangle c
+~ Rectangle d
+~ LinearGradient color
+- String name
++ int form
++ <<Create>> Form(Rectangle,Rectangle,Rectangle,Rectangle,String)
++ String getName()
++ void changeForm()
++ void colorAnimation()
++ void setFade(FadeTransition,Node)
+}
+
+
+javafx.application.Application <|-- com.example.tetris.Tetris
+com.example.tetris.Pane <|-- com.example.tetris.Intro
+javafx.scene.layout.BorderPane <|-- com.example.tetris.UserControl
+com.example.tetris.Pane <|-- com.example.tetris.Settings
+com.example.tetris.Pane <|-- com.example.tetris.ShowNext
+@enduml
